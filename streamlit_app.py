@@ -6,7 +6,6 @@ import streamlit as st
 
 """
 # Welcome to the first app from Applied Mechanics Lab!
-In the meantime, below is an example of what you can do with just a few lines of code:
 """
 
 uploaded_file = st.file_uploader("Choose a file")
