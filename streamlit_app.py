@@ -9,6 +9,24 @@ import streamlit as st
 In the meantime, below is an example of what you can do with just a few lines of code:
 """
 
+uploaded_file = st.file_uploader("Choose a file")
+
+if uploaded_file is not None:
+     bytes_data = uploaded_file.read()
+     st.write(bytes_data)
+
+# x= bytes_data[:,1]
+# y=bytes_data[:,2]
+
+df = pd.DataFrame({
+
+  'date': ['10/1/2019','10/2/2019', '10/3/2019', '10/4/2019'],
+  'second column': [10, 20, 30, 40]
+})
+
+df
+
+st.line_chart(df.rename(columns={'date':'index'}).set_index('index'))
 
 with st.echo(code_location='below'):
     total_points = st.slider("Number of points in spiral", 1, 5000, 2000)
