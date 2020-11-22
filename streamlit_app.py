@@ -7,78 +7,115 @@ import streamlit as st
 from matplotlib import pyplot as plt
 
 """
-# Welcome to the first app from Applied Mechanics Lab!
+# PANTHER's AO algorithm
+
+The AO algorithm allows you to ....
+
+
 """
-user_input = st.text_input("label goes here", "1")
 
-# l1X1 = st.text_input("label goes here", Accelerometer 1 )
+"""
+##### Input and Data
+"""
 
-uploaded_file = st.file_uploader("Measurements from Accelerometer 1 ")
+units = st.selectbox(
+    "In what units will you be providing spatial measurements",
+    ("centimeters ", "millimeters", "meters"),
+)
+
+"""
+######
+"""
+
+Acc1X1X2X3 = st.text_input(
+    "Provide Accelerometer #1's location by inputting the values of its x-,y-, and z-coordinates separated by commas. For example in somple global co-ordinates frame the x-,y-, and z-cordinates of the Acceleroemeter #1 is 0.2 cm, 5 cm, 3.2 cm, then in the followsing box input 0.2, 5, 3.2",
+    "0.0,0.0,0.0",
+    1000,
+    "Acc1X1X2X3Key",
+)
+
+
+Acc2X1X2X3 = st.text_input(
+    "Provide Accelerometer #2's x-,y-, and z-coordinates separated by commas.",
+    "0.0,0.0,0.0",
+    1000,
+    "Acc2X1X2X3Key",
+)
+
+Acc3X1X2X3 = st.text_input(
+    "Provide Accelerometer #3's x-,y-, and z-coordinates separated by commas.",
+    "0.0,0.0,0.0",
+    1000,
+    "Acc3X1X2X3Key",
+)
+
+
+Acc4X1X2X4 = st.text_input(
+    "Provide Accelerometer #4's x-,y-, and z-coordinates separated by commas.",
+    "0.0,0.0,0.0",
+    1000,
+    "Acc4X1X2X3Key",
+)
+# Acc1X2 = st.text_input("y-coordintate", "0.0", 10, "Acc1X2Key")
+# Acc1X3 = st.text_input("z-coordintate", "0.0", 10, "Acc1X1Key")
+
+
 Measurement1_numpy = np.array([[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12]])
+Measurement2_numpy = np.array([[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12]])
+Measurement3_numpy = np.array([[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12]])
+Measurement4_numpy = np.array([[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12]])
 
-
-if uploaded_file is not None:
-    Measurement1_df = pd.read_csv(uploaded_file)
+DataFile1 = st.file_uploader("Measurements from Accelerometer 1 ")
+if DataFile1 is not None:
+    Measurement1_df = pd.read_csv(DataFile1)
     Measurement1_numpy = Measurement1_df.to_numpy()
     st.line_chart(Measurement1_df.rename(columns={"x": "index"}).set_index("index"))
 
-"""
-### x column
-"""
-st.write(Measurement1_numpy[:, 0].sum())
+
+DataFile2 = st.file_uploader("Measurements from Accelerometer 2 ")
+if DataFile2 is not None:
+    Measurement2_df = pd.read_csv(DataFile2)
+    Measurement2_numpy = Measurement2_df.to_numpy()
+    st.line_chart(Measurement2_df.rename(columns={"x": "index"}).set_index("index"))
+DataFile3 = st.file_uploader("Measurements from Accelerometer 3 ")
+if DataFile3 is not None:
+    Measurement3_df = pd.read_csv(DataFile3)
+    Measurement3_numpy = Measurement3_df.to_numpy()
+    st.line_chart(Measurement3_df.rename(columns={"x": "index"}).set_index("index"))
+DataFile4 = st.file_uploader("Measurements from Accelerometer 4 ")
+if DataFile4 is not None:
+    Measurement4_df = pd.read_csv(DataFile4)
+    Measurement4_numpy = Measurement4_df.to_numpy()
+    st.line_chart(Measurement4_df.rename(columns={"x": "index"}).set_index("index"))
+
 
 """
-### y column
+### The average value of the Accelerometer \#1's acceleration is
 """
-st.write(Measurement1_numpy[:, 1])
+dummy = np.array(Measurement1_numpy[:, 0])
+st.write(np.average(dummy))
 
-
-file2 = st.file_uploader("Measurements from Accelerometer 2 ")
-
-if file2 is not None:
-    # bytes_data = uploaded_file.read()
-    # st.write(bytes_data)
-
-    Measurement2 = pd.read_csv(file2)
-    st.line_chart(Measurement2.rename(columns={"x": "index"}).set_index("index"))
-# x= bytes_data[:,1]
-# y=bytes_data[:,2]
-
-df = pd.DataFrame(
-    {
-        "date": ["10/1/2019", "10/2/2019", "10/3/2019", "10/4/2019"],
-        "second column": [10, 20, 30, 40],
-    }
-)
-
-df
-
-st.line_chart(df.rename(columns={"date": "index"}).set_index("index"))
-
-with st.echo(code_location="below"):
-    total_points = st.slider("Number of points in spiral", 1, 5000, 2000)
-    num_turns = st.slider("Number of turns in spiral", 1, 100, 9)
-
-    Point = namedtuple("Point", "x y")
-    data = []
-
-    points_per_turn = total_points / num_turns
-
-    for curr_point_num in range(total_points):
-        curr_turn, i = divmod(curr_point_num, points_per_turn)
-        angle = (curr_turn + 1) * 2 * math.pi * i / points_per_turn
-        radius = curr_point_num / total_points
-        x = radius * math.cos(angle)
-        y = radius * math.sin(angle)
-        data.append(Point(x, y))
-
-    st.altair_chart(
-        alt.Chart(pd.DataFrame(data), height=500, width=500)
-        .mark_circle(color="#0068c9", opacity=0.5)
-        .encode(x="x:Q", y="y:Q")
-    )
-
+# """
+# ### y column
+# """
+# st.write(Measurement1_numpy[:, 1])
+#
 
 fig, ax = plt.subplots()
-ax.scatter([1, 2, 3], [1, 2, 3])
-st.pyplot(fig)
+if DataFile1 is not None and DataFile2 is not None:
+    ax.plot(Measurement1_numpy[:, 1], Measurement2_numpy[:, 1])
+    st.pyplot(fig)
+
+"""
+#### Contributors:
+ * [The PANTHER program](https://www.panther.engr.wisc.edu/)
+ * [Applied Mechanics Lab](https://appliedmechanicslab.github.io/)
+
+
+
+#### AO-agorithm publication
+###### Access from
+* [Applied Mechanics Lab (preprint, free access, pdf)](https://appliedmechanicslab.github.io/AnAccelerometer-onlyAlgorithm.pdf)
+* [arXiv.org, preprint (preprint, free access, pdf)](https://arxiv.org/abs/1911.09556)
+* [Journal of the Mechanics and Physics of Solids (final version, pdf) ](https://www.sciencedirect.com/science/article/pii/S0022509620302490?casa_token=IMQbF22_LLQAAAAA:1JB4y48vk3JLYflI500eIczbVXQ9zyyLRpvQ84t_dLv8dlShY8MKkmFxovwYtW3xabOWfIy9M8g)
+"""
