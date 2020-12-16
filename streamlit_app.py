@@ -9,7 +9,7 @@ from matplotlib import pyplot as plt
 """
 # PANTHER's AO algorithm
 
-The AO algorithm allows you to ....
+The AO algorithm allows you to predict ...
 
 
 """
