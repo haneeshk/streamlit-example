@@ -5,6 +5,7 @@ import math
 import pandas as pd
 import streamlit as st
 from matplotlib import pyplot as plt
+import plotly.graph_objects as go
 
 """
 # PANTHER's AO algorithm
@@ -87,6 +88,20 @@ if DataFile4 is not None:
     Measurement4_df = pd.read_csv(DataFile4)
     Measurement4_numpy = Measurement4_df.to_numpy()
     st.line_chart(Measurement4_df.rename(columns={"x": "index"}).set_index("index"))
+
+"""
+### Yang's try
+"""
+Time = np.array([1,2,3])
+data1 = np.array([1,2,3])
+plotly_fig = go.Figure()
+plotly_fig.add_trace(go.Scatter(x=Time, y=data1,
+                    mode='lines',
+                    opacity = 0.3,
+                    line =  dict(color='rgb(0,0,0)', width=10),
+                    name = 'Virtual data'
+                    ))
+st.write(plotly_fig)
 
 
 """
