@@ -101,7 +101,8 @@ plotly_fig.add_trace(go.Scatter(x=Time, y=data1,
                     line =  dict(color='rgb(0,0,0)', width=10),
                     name = 'Virtual data'
                     ))
-st.write(plotly_fig)
+st.plotly_chart(plotly_fig, use_container_width=True)
+#st.write(plotly_fig)
 
 
 """
