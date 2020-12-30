@@ -89,21 +89,6 @@ if DataFile4 is not None:
     Measurement4_numpy = Measurement4_df.to_numpy()
     st.line_chart(Measurement4_df.rename(columns={"x": "index"}).set_index("index"))
 
-"""
-### Yang's try
-"""
-Time = np.array([1,2,3])
-data1 = np.array([1,2,3])
-plotly_fig = go.Figure()
-plotly_fig.add_trace(go.Scatter(x=Time, y=data1,
-                    mode='lines',
-                    opacity = 0.3,
-                    line =  dict(color='rgb(0,0,0)', width=10),
-                    name = 'Virtual data'
-                    ))
-st.plotly_chart(plotly_fig, use_container_width=True)
-#st.write(plotly_fig)
-
 
 """
 ### The average value of the Accelerometer \#1's acceleration is
