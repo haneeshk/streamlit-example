@@ -13,6 +13,21 @@ The AO algorithm allows you to predict the acceleration......
 
 
 """
+x = np.arange(10)
+
+fig = go.Figure(data=go.Scatter(x=x, y=x**2))
+st.plotly_chart(fig)
+
+
+
+
+
+
+
+
+
+
+
 
 """
 ##### Input and Data
